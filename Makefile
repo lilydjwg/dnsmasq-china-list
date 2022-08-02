@@ -6,7 +6,7 @@ SHELL=bash
 %.china.raw.txt: %.china.conf
 	sed -e 's|^server=/\(.*\)/114.114.114.114$$|\1|' $< | grep -Ev -e '^#' -e '^$$' > $@
 
-raw: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt
+raw: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
 
 dnsmasq: raw
 	sed -e 's|\(.*\)|server=/\1/$(SERVER)|' accelerated-domains.china.raw.txt > accelerated-domains.china.dnsmasq.conf
@@ -70,7 +70,7 @@ endif
 clean:
 	rm -f {accelerated-domains,google,apple}.china.*.conf *.smartdns.conf {accelerated-domains,google,apple}.china.raw.txt dnscrypt-proxy-forwarding-rules.txt *-rev.regex
 
-cn-domains-rev.regex: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt
+cn-domains-rev.regex: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
 	cat $^ | rev | sed 's=\.=\\.=g' | tr '\n' '|' | head -c -1 | sed 's/^/(/;s/$$/)($$|\\.)/' > $@
 
 regex: cn-domains-rev.regex
