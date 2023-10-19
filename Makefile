@@ -73,4 +73,6 @@ clean:
 cn-domains-rev.regex: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
 	cat $^ | rev | sed 's=\.=\\.=g' | tr '\n' '|' | head -c -1 | sed 's/^/(/;s/$$/)($$|\\.)/' > $@
 
-regex: cn-domains-rev.regex
+cn-domains-rev.suffix: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
+	cat $^ | rev > $@
+
