@@ -70,9 +70,9 @@ endif
 clean:
 	rm -f {accelerated-domains,google,apple}.china.*.conf *.smartdns.conf {accelerated-domains,google,apple}.china.raw.txt dnscrypt-proxy-forwarding-rules.txt *-rev.regex
 
-cn-domains-rev.regex: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
+cn-domains-rev.regex: accelerated-domains.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
 	cat $^ | rev | sed 's=\.=\\.=g' | tr '\n' '|' | head -c -1 | sed 's/^/(/;s/$$/)($$|\\.)/' > $@
 
-cn-domains-rev.suffix: accelerated-domains.china.raw.txt google.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
+cn-domains-rev.suffix: accelerated-domains.china.raw.txt apple.china.raw.txt near-domains.china.raw.txt
 	cat $^ | rev > $@
 
